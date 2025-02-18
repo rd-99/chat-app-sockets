@@ -39,7 +39,7 @@ export const createChatRoom =async (nickname: string, roomName : string= Math.ra
   }
 };
 
-export const sendMessage = (message: string , email  :string , nickname : string) => {
+export const sendMessage = (message: string , email:string , nickname : string) => {
     
   if (isConnReady) {
     client.sendMessage(SocketMessageTypes.SEND_MESSAGE, {
@@ -89,7 +89,8 @@ export const joinChatRoom = async (nickname: string , roomId: string,) => {
     const messages = useChatStore.getState().setMessages;
     if (isConnReady) {
         const f = await client.joinChatRoom(nickname, roomId , "");
-        messages(f);
+        console.log(f , 399239999);
+        messages(f.messages);
 
     } else {
         while (!isConnReady) {

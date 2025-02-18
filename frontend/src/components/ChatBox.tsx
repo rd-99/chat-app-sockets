@@ -2,19 +2,21 @@ import  { useState } from 'react';
 import { sendMessage } from './TeleparthyImpl';
 import { UserAuthContext } from '../pages/ProtectedRoute';
 import Message from './Message';
-
+import {
+    SessionChatMessage,
+  } from "teleparty-websocket-lib";
 // interface ChatBoxProps {
 //     messages: string[];
 //     onSendMessage: (message: string) => void;
 // }
 
-function ChatBox({ messages }) {
+function ChatBox({ messages } : { messages: SessionChatMessage[] }) {
     const { user } = UserAuthContext();
     const [newMessage, setNewMessage] = useState('');
 
     const handleSendMessage = () => {
         if (newMessage.trim() !== '') {
-            sendMessage(newMessage , user?.email,"nick");
+            sendMessage(newMessage , user!.email,"nick");
             setNewMessage('');
         }
     };
@@ -23,7 +25,6 @@ function ChatBox({ messages }) {
         <div className="w-full p-8 bg-amber-500 rounded-lg shadow-md">
             <div className="flex flex-col gap-2 mb-4">
                 {messages.map((message, index) => (
-                    console.log("ChatBox" , message),
                     <Message key={index} message={message} />
                 ))}
             </div>

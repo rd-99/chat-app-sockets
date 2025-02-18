@@ -1,12 +1,12 @@
 import { create } from "zustand";
 import { sendUserTyping } from "../components/TeleparthyImpl";
-import { MessageProps } from "../components/Message";
-
+//import { MessageProps } from "../components/Message";
+import {SessionChatMessage} from "teleparty-websocket-lib";
 interface ChatState {
-    messages: MessageProps[];
+    messages: SessionChatMessage[];
     room : string;
-    addMessage: (message: MessageProps) => void;
-    setMessages: (messages: MessageProps[]) => void;
+    addMessage: (message: SessionChatMessage) => void;
+    setMessages: (messages: SessionChatMessage[]) => void;
     setRoom: (room: string) => void;
 }
 
@@ -17,9 +17,8 @@ export const useChatStore = create<ChatState>((set) => ({
         {  messages: [...state.messages, message] }
     )),
     setMessages: (messages) => {
-        const msgs = messages.messages;
-        console.log("Setting messages" , messages.messages);
-        set({ msgs })
+        console.log("Setting messages" , messages);
+        set({ messages })
     },
     setRoom: (room)  => set({ room }),
     sendUserTyping: () => sendUserTyping(true , "email"),
