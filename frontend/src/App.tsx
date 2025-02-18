@@ -2,7 +2,7 @@ import {  BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar } from "./components/Navbar";
-import ChatRoom from "./pages/Chatroom";
+import ChatRoom from "./pages/ChatRoom";
 import ProtectedRoutes from "./pages/ProtectedRoute";
 import Login from "./pages/Login";
 import { PrivateRoute } from "./pages/PrivateRoute";
