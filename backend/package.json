@@ -1,0 +1,30 @@
+{
+  "name": "chat-backend",
+  "version": "1.0.0",
+  "description": "chat app with sockets",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "teleparthy-chat-app-impl"
+  },
+  "keywords": [
+    "chat",
+    "react",
+    "node"
+  ],
+  "author": "Ruturaj D",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "joi": "^17.13.3",
+    "mongoose": "^8.10.1",
+    "nodemon": "^3.1.9",
+    "teleparty-websocket-lib": "file:/Users/ruturajdhakane/projects/Assignment/chat-app-sockets/backend/teleparty-websocket-lib-master"
+  }
+}
