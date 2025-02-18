@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import axios  from "axios";
+// import axios  from "axios";
 import {z} from "zod";
 import { ProtectedRoutesProps, SignInParam, User, UserContextType } from "../types";
 
@@ -43,9 +43,9 @@ export default ProtectedRoutes;
 export const UserAuthContext = () => {
 
     const context = useContext(userContext)
-    if(!context) {
-        throw new Error("UserAuthContext must be used within UserAuthProvider")
-    }
+    // if(!context) {
+    //     throw new Error("abc")
+    // }
     return context;
 
 }

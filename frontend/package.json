@@ -16,6 +16,7 @@
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.5",
     "tailwindcss": "^4.0.6",
+    "teleparty-websocket-lib": "github:watchparty-org/teleparty-WebSocket-lib",
     "zod": "^3.24.2"
   },
   "devDependencies": {

@@ -1,10 +1,12 @@
 import ChatBox from "../components/Chatbox";
 import SendMessage from "../components/SendMessage";
 
+
+
 function ChatRoom() {
     return ( 
     <div>
-        <ChatBox />
+        <ChatBox messages={["fjf" , "jned"]} />
         <SendMessage />
 
     </div> );
