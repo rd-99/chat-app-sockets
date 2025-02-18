@@ -14,6 +14,7 @@ const eventHandler: SocketEventHandler = {
     isConnReady = false;
   },
   onMessage: (message) => {
+    console.log(message);
     switch (message.type) {
       case SocketMessageTypes.SEND_MESSAGE:
         console.log(message.data);
@@ -38,7 +39,7 @@ export const createChatRoom = (nickname: string, roomName : string= Math.random(
   } else {
     while (!isConnReady) {
         client = new TelepartyClient(eventHandler);
-      setTimeout(() => {
+       setTimeout(() => {
         createChatRoom(nickname, roomName);
       }, 1000);
     }
