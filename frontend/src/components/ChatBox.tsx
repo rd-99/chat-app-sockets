@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
+import { sendMessage } from './TeleparthyImpl';
+import { UserAuthContext } from '../pages/ProtectedRoute';
+import Message from './Message';
 
-interface ChatBoxProps {
-    messages: string[];
-    onSendMessage: (message: string) => void;
-}
+// interface ChatBoxProps {
+//     messages: string[];
+//     onSendMessage: (message: string) => void;
+// }
 
-function ChatBox({ messages, onSendMessage }: ChatBoxProps) {
+function ChatBox({ messages }) {
+    const { user } = UserAuthContext();
     const [newMessage, setNewMessage] = useState('');
 
     const handleSendMessage = () => {
         if (newMessage.trim() !== '') {
-            onSendMessage(newMessage);
+            sendMessage(newMessage , user?.email,"nick");
             setNewMessage('');
         }
     };
@@ -19,12 +23,11 @@ function ChatBox({ messages, onSendMessage }: ChatBoxProps) {
         <div className="w-full p-8 bg-amber-500 rounded-lg shadow-md">
             <div className="flex flex-col gap-2 mb-4">
                 {messages.map((message, index) => (
-                    <div key={index} className="p-2 bg-gray-200 rounded-lg">
-                        {message}
-                    </div>
+                    console.log("ChatBox" , message),
+                    <Message key={index} message={message} />
                 ))}
             </div>
-            <div className="flex">
+            <div className="flex bg-amber-50">
                 <input
                     type="text"
                     placeholder="Type a message"
@@ -36,7 +39,7 @@ function ChatBox({ messages, onSendMessage }: ChatBoxProps) {
                     onClick={handleSendMessage}
                     className="px-4 py-2 text-white bg-blue-500 rounded-r-lg hover:bg-blue-700"
                 >
-                    Send
+                    Send 
                 </button>
             </div>
         </div>

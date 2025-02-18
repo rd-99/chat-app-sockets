@@ -17,7 +17,7 @@ export const Navbar = () => {
       </div>
       <div className="flex items-center">
         {user && <span className="mr-4">Hello, {user.email}</span>}
-        {user && <button
+        {user?.email && <button
           onClick={handleLogout}
           className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
         >

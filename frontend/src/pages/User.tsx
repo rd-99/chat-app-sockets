@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { client, createChatRoom } from "../components/TeleparthyImpl";
+import { client, createChatRoom, joinChatRoom } from "../components/TeleparthyImpl";
 import { useNavigate } from "react-router-dom";
+import { useChatStore } from "../store/useChatStore";
 
 
 
@@ -10,7 +11,7 @@ function User() {
     const [newNickname, setNewNickname] = useState('');
     const [existingNickname, setExistingNickname] = useState('');
     const [roomId, setRoomId] = useState('');
-
+    const setRoom = useChatStore.getState().setRoom;
     const handleCreateChatroom = () => {
         if(newNickname !== '') {
         client.createChatRoom(newNickname , "");
@@ -19,12 +20,14 @@ function User() {
             client.createChatRoom(newNickname , "");
         }
         createChatRoom(newNickname);
+        setRoom(existingNickname);
         navigate('/chatroom');
     };
 
     const handleJoinChatroom = (e: React.FormEvent) => {
         e.preventDefault();
-        alert(`Join Chatroom functionality to be implemented with room ID: ${roomId}`);
+        joinChatRoom(existingNickname , roomId);
+        navigate('/chatroom');
     };
     return (
         <div className="flex flex-col items-center justify-center h-screen bg-gray-100">

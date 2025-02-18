@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 // import axios  from "axios";
 import {z} from "zod";
-import { ProtectedRoutesProps, SignInParam, User, UserContextType } from "../types";
+import { ProtectedRoutesProps, SignInParam, User, UserContextType } from "../../types";
 
 const userContext = createContext<UserContextType | undefined>(undefined);
 
@@ -22,6 +22,7 @@ function ProtectedRoutes({children} : ProtectedRoutesProps) {
         const response  = {email , status: 200};
         if(response.status === 200) {
             const {email} = response;
+            localStorage.setItem("user", email);
             setUser({email});
         }
     }
@@ -43,9 +44,10 @@ export default ProtectedRoutes;
 export const UserAuthContext = () => {
 
     const context = useContext(userContext)
-    // if(!context) {
-    //     throw new Error("abc")
-    // }
+    if(!context) {
+        throw new Error("abc")
+    }
+
     return context;
 
 }

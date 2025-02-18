@@ -1,13 +1,12 @@
 import ChatBox from "../components/Chatbox";
-import SendMessage from "../components/SendMessage";
-
+import { useChatStore } from "../store/useChatStore";
 
 
 function ChatRoom() {
+    const messages = useChatStore((state) => state.messages);
     return ( 
     <div>
-        <ChatBox messages={["fjf" , "jned"]} />
-        <SendMessage />
+        <ChatBox messages={messages} />
 
     </div> );
 }
