@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "postinstall": "sh write-ssh-key.sh"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.6",
