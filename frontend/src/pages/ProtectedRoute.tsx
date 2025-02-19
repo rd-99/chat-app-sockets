@@ -29,11 +29,12 @@ function ProtectedRoutes({children} : ProtectedRoutesProps) {
     }
 
     const signout = async () => {
+        localStorage.removeItem("user");
         setUser(null);
     }
     
     return ( 
-        <userContext.Provider value={{user , signin, signout}}>
+        <userContext.Provider value={{setUser ,user , signin, signout}}>
             {children}
         </userContext.Provider>
      );
@@ -43,9 +44,17 @@ export default ProtectedRoutes;
 
 export const UserAuthContext = () => {
 
+
     const context = useContext(userContext)
-    if(!context) {
-        throw new Error("abc")
+     if(!context) {
+        throw new Error("erorr - contecxt null");
+     }
+    if(!context.user && localStorage.getItem("user") !== null) {
+        const storedUser = localStorage.getItem("user");
+        if (storedUser  && context.user === null) {
+            context.setUser({ email: storedUser });
+        }
+        
     }
 
     return context;

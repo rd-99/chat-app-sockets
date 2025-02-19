@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { client, createChatRoom, joinChatRoom } from "../components/TeleparthyImpl";
+import { client, joinChatRoom } from "../components/TeleparthyImpl";
 import { useNavigate } from "react-router-dom";
 import { useChatStore } from "../store/useChatStore";
 
@@ -11,23 +11,42 @@ function User() {
     const [newNickname, setNewNickname] = useState('');
     const [existingNickname, setExistingNickname] = useState('');
     const [roomId, setRoomId] = useState('');
-    const setRoom = useChatStore.getState().setRoom;
+    //const setRoom = useChatStore.getState().setRoom;
+    const {setRoom , setNickName } = useChatStore.getState();
     const handleCreateChatroom = () => {
         if(newNickname !== '') {
-        client.createChatRoom(newNickname , "");
+            setNickName(newNickname);
+        client.createChatRoom(newNickname , "").then((roomId) => {
+            setRoom(roomId);
+            navigate('/chatroom');
+        }).catch((err) => {
+            console.log(err);
+            navigate('/user');
+        })
         }else{
             setNewNickname(Math.random().toString(36).substring(7));
-            client.createChatRoom(newNickname , "");
+            client.createChatRoom(newNickname , "").then((roomId) => {
+                setRoom(roomId);
+                navigate('/chatroom');
+            }).catch((err) => {
+                console.log(err);
+                navigate('/user');
+            })
         }
-        createChatRoom(newNickname);
-        setRoom(existingNickname);
-        navigate('/chatroom');
+        
     };
 
     const handleJoinChatroom = (e: React.FormEvent) => {
         e.preventDefault();
-        joinChatRoom(existingNickname , roomId);
-        navigate('/chatroom');
+        joinChatRoom(existingNickname , roomId).then(() => {
+            setNickName(existingNickname);
+            setRoom(roomId);
+            navigate('/chatroom');
+        }).catch((err) => {
+            console.log(err);
+            navigate('/user');
+        })
+        
     };
     return (
         <div className="flex flex-col items-center justify-center h-screen bg-gray-100">

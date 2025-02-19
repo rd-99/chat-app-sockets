@@ -3,7 +3,9 @@ import { UserAuthContext } from "./ProtectedRoute";
 import { useNavigate } from "react-router-dom";
 function Login() {
   const navigate = useNavigate();
-  const { signin, user } = UserAuthContext();
+  const authContext = UserAuthContext();
+  const signin = authContext?.signin;
+  const user = authContext?.user;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   useEffect(() => {

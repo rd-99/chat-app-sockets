@@ -3,7 +3,9 @@ import {UserAuthContext} from "../pages/ProtectedRoute"
 
 export const Navbar = () => {
   const navigate = useNavigate();
-  const {user,signout} = UserAuthContext();
+  const userAuthContext = UserAuthContext();
+  const user = userAuthContext?.user;
+  const signout = userAuthContext?.signout;
   const handleLogout = () => {
     signout();
     navigate("/");
