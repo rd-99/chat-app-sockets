@@ -1,0 +1,7 @@
+{
+    "build": {
+      "env": {
+        "GIT_SSH_COMMAND": "ssh -i /root/.ssh/vercel -o StrictHostKeyChecking=no"
+      }
+    }
+  }
