@@ -1,4 +1,4 @@
-import {  BrowserRouter, Route, Routes } from "react-router-dom";
+import {  HashRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar } from "./components/Navbar";
@@ -9,7 +9,7 @@ import { PrivateRoute } from "./pages/PrivateRoute";
 import User from "./pages/User";
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
     <ProtectedRoutes>
       <Navbar />
       <Routes>
@@ -33,7 +33,7 @@ function App() {
         />
       </Routes>
     </ProtectedRoutes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
