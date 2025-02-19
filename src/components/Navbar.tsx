@@ -9,12 +9,11 @@ export const Navbar = () => {
   const handleLogout = () => {
     signout();
     navigate("/");
-
   }
   return (
     <nav className="flex items-center justify-between p-4 bg-gray-800 text-white">
       <div className="flex items-center">
-        <img src="https://w7.pngwing.com/pngs/941/692/png-transparent-black-small-apple-logo-logo-material-apple-logo-black-thumbnail.png" alt="TeleP" className="h-8 w-8 mr-2" />
+        <img src="/chat-app-sockets/logo.png" alt="TeleP" className="h-8 w-8 mr-2" />
         <span className="text-xl font-bold">Chat-App</span>
       </div>
       <div className="flex items-center">
@@ -29,3 +28,5 @@ export const Navbar = () => {
     </nav>
   );
 };
+
+///src="https://w7.pngwing.com/pngs/941/692/png-transparent-black-small-apple-logo-logo-material-apple-logo-black-thumbnail.png"

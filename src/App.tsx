@@ -13,7 +13,7 @@ function App() {
     <ProtectedRoutes>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="*" element={<Login />} />
 
         <Route
           path="/user"

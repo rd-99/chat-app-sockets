@@ -1,11 +1,12 @@
-import  { useRef, useState } from 'react';
-import { sendMessage } from './TeleparthyImpl';
+import  { useEffect, useRef, useState } from 'react';
+import { sendMessage, sendUserTyping } from './TeleparthyImpl';
 import { UserAuthContext } from '../pages/ProtectedRoute';
 import Message from './Message';
 import {
     SessionChatMessage,
   } from "teleparty-websocket-lib";
 import { useChatStore } from '../store/useChatStore';
+import AnyOneTypingCompoent from './AnyOneTyping';
 // interface ChatBoxProps {
 //     messages: string[];
 //     onSendMessage: (message: string) => void;
@@ -14,35 +15,49 @@ import { useChatStore } from '../store/useChatStore';
 function ChatBox({ messages } : { messages: SessionChatMessage[] }) {
     const { user } = UserAuthContext();
     const [newMessage, setNewMessage] = useState('');
-    const nickname = useChatStore.getState().nickName;
+    const {nickName } = useChatStore.getState();
     const roomId = useChatStore.getState().room;
-    const userTypingRef = useRef(null);
-
+    const userTypingRef = useRef<NodeJS.Timeout | null>(null);
 
     const handleSendMessage = () => {
         if (newMessage.trim() !== '') {
-            sendMessage(newMessage , user!.email,nickname);
+            sendMessage(newMessage, user!.email, nickName);
             setNewMessage('');
         }
     };
 
-    const handleTyping = (e : React.ChangeEvent<HTMLInputElement>) => {
-
+    const handleTyping = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNewMessage(e.target.value);
+
         if (userTypingRef.current) {
             clearTimeout(userTypingRef.current);
         }
-        // sendUserTyping(true , user.email);
-        // userTypingRef.current = setTimeout(() => {
-        //     sendUserTyping(false , nickname);
-        // }, 1000);
-    }
+
+        sendUserTyping(true, user!.email);
+
+        userTypingRef.current = setTimeout(() => {
+            sendUserTyping(false, user!.email);
+        }, 1000);
+    };
+
+    useEffect(() => {
+        return () => {
+            if (userTypingRef.current) {
+                clearTimeout(userTypingRef.current);
+            }
+        };
+    }, []);
 
     return (
         <div>
         <div>
             <h1 className="text-2xl font-semibold">Chat Room: {roomId}</h1>
         </div>
+        <AnyOneTypingCompoent />
+        {/* {usersCurrentlyTyping.length>0 && <div>
+            <h1 className="text-blue-700 font-semibold">Currently Typing: {
+                usersCurrentlyTyping.join(', ')}</h1>
+        </div>} */}
         <div className="w-full p-8 bg-amber-500 rounded-lg shadow-md">
             <div className="flex flex-col gap-2 mb-4">
                 {messages.map((message, index) => (

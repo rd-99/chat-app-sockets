@@ -18,4 +18,6 @@ export const useChatStore = create<ChatState>((set) => ({
     setRoom: (room)  => set({ room }),
     sendUserTyping: () => sendUserTyping(true , "email"),
     setNickName: (nickName) => set({ nickName }),
-}));
+    usersCurrentlyTyping: [],
+    setUsersCurrentlyTyping: (usersCurrentlyTyping) => set({ usersCurrentlyTyping})}
+));

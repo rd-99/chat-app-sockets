@@ -27,6 +27,7 @@ export interface ChatState {
     setRoom: (room: string) => void;
     nickName : string;
     setNickName: (nickName: string) => void;
-    sendUserTyping: () => void;
+    usersCurrentlyTyping: string[];
+    setUsersCurrentlyTyping: (usersCurrentlyTyping: string[]) => void;
     
 }

@@ -6,6 +6,7 @@ import {
 } from "teleparty-websocket-lib";
 import { useChatStore } from "../store/useChatStore";
 let isConnReady = false;
+let typingTimeout: string | number | NodeJS.Timeout | undefined;
 const eventHandler: SocketEventHandler = {
   onConnectionReady: () => {
     isConnReady = true;
@@ -14,7 +15,21 @@ const eventHandler: SocketEventHandler = {
     isConnReady = false;
   },
   onMessage: (message) => {
-     //console.log(message , 55);
+     if(message?.type === "setTypingPresence"){
+      
+      console.log(message , 4555);
+      if(message.data?.anyoneTyping == true){
+        if (typingTimeout) {
+          clearTimeout(typingTimeout);
+        }
+        const changetypingUsers = useChatStore.getState().setUsersCurrentlyTyping;
+        changetypingUsers(message.data?.usersTyping);
+        typingTimeout = setTimeout(() => {
+          changetypingUsers([]);
+        },1000)
+      }
+      return
+     }
      if(Object.prototype.hasOwnProperty.call(message, "data") && message.data?.body){
       const data = message.data.body;
       switch (data){
@@ -90,18 +105,18 @@ export const sendMessage = (message: string , email:string , nickname : string) 
 
 export const sendUserTyping = (isTyping: boolean , email:string
 ) => {
+  console.log(isTyping , email, isConnReady);
   if (isConnReady) {
-    client.sendMessage(SocketMessageTypes.SET_TYPING_PRESENCE, {
-      data: isTyping,
-      user: email,
-    });
+    client.sendMessage(SocketMessageTypes.SET_TYPING_PRESENCE,{
+      typing: true
+  } );
   } else {
     const interval = setInterval(() => {
         if (isConnReady) {
-          client.sendMessage(SocketMessageTypes.SET_TYPING_PRESENCE, {
-            data: true,
-            user: email,
-          });
+          const mcme = client.sendMessage(SocketMessageTypes.SET_TYPING_PRESENCE, {
+            typing: true
+        });
+          console.log(mcme , 4555);
           clearInterval(interval);
         }
       }, 1000);

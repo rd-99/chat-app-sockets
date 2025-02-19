@@ -21,7 +21,7 @@ import { useChatStore } from "../store/useChatStore";
 function Message(message  : { message : SessionChatMessage }) {
     // console.log(message , 55);
     const msg = message.message;
-    const { body,isSystemMessage,timestamp} = msg;
+    const { body,isSystemMessage,timestamp,userNickname} = msg;
     
     const {nickName} = useChatStore.getState()
     const isOwnMessage = nickName === msg?.userNickname;
@@ -30,7 +30,7 @@ function Message(message  : { message : SessionChatMessage }) {
             <div className={`flex flex-col p-2 bg-amber-200 rounded-lg shadow-md ${isSystemMessage ? 'w-full' : 'max-w-xs'}`}>
                 {!isSystemMessage && (
                     <div className="flex items-center justify-between mb-2">
-                        <div className="font-semibold text-blue-600">{nickName}</div>
+                        <div className="font-semibold text-blue-600">{userNickname}</div>
                         <div className="text-xs text-gray-500">{new Date(timestamp).toLocaleTimeString()}</div>
                     </div>
                 )}
