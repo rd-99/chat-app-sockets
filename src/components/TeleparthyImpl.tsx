@@ -15,6 +15,7 @@ const eventHandler: SocketEventHandler = {
     isConnReady = false;
   },
   onMessage: (message) => {
+    console.log(message , 455522);
      if(message?.type === "setTypingPresence"){
       
       console.log(message , 4555);
@@ -40,7 +41,7 @@ const eventHandler: SocketEventHandler = {
         console.log(message , 4555);
         message.data.body = `${message.data?.userNickname} - joined the party🎉`;
         break;
-      case "left the party🎉":
+      case "left":
         message.data.body = `${message.data?.userNickname} - left the party🎉`;
         break;
         default:

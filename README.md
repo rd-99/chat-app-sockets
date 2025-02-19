@@ -8,3 +8,5 @@ previous messages added if user joining ongoinf chat
 
 start typing -> see a message
 
+sys message on join/create/leave chat
+
