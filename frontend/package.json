@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "sh deploy.sh"
+    "deploy": "sh deploy.sh",
+    "postinstall": "sh write-ssh-key.sh"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.6",
