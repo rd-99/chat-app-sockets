@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "sh deploy.sh",
+    "deploy": "gh-pages -d dist -b gh-pages --source newbranch",
     "postinstall": "sh write-ssh-key.sh"
   },
   "dependencies": {
